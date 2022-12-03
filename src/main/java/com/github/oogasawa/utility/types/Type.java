@@ -1,9 +1,7 @@
 package com.github.oogasawa.utility.types;
 
-import java.io.File;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import com.github.oogasawa.utility.types.string.DoubleToString;
@@ -733,7 +731,7 @@ public class Type {
     }
 
     public static int to_int(double r) {
-        Double rD = new Double(r);
+        Double rD = Double.valueOf(r);
         return rD.intValue();
     }
 
