@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.github.oogasawa.utility.types.Type;
+
 public class StringUtil {
 
     //protected static org.slf4j.Logger logger = LoggerFactory.getLogger(StringUtil.class);
@@ -191,6 +193,56 @@ public class StringUtil {
     }
 
 
+    /** Replaces all newline characters in the given string with a space character.
+     *
+     * @param origStr A String
+     * @return the replaced string.
+     */
+   public static String removeNewLines(String origStr) {
+        ArrayList<String> lines = StringUtil.splitByNewLine(origStr);
+        String ret = join(" ", lines);
+        return ret;
+    }
+
+
+
+    private static <T> String join(String delim, ArrayList<T> list) {
+        if (list == null || list.size() == 0) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(list.get(0));
+
+        for (int i = 1; i < list.size(); i++) {
+            sb.append(delim);
+            sb.append(Type.toString(list.get(i)));
+        }
+
+        return sb.toString();
+    }
+
+    
+    /** Replaces all tab characters in the given string with a string consisting of 8 space characters.
+     *
+     * @param origStr A String
+     * @return the replaced string.
+     */
+    public static String removeTabs(String str) {
+        StringBuffer buf = new StringBuffer();
+        int length = str.length();
+        for (int i = 0; i < length; i++) {
+            if (str.charAt(i) == '\t') {
+                buf.append("        ");
+            } else {
+                buf.append(str.charAt(i));
+            }
+        }
+        return buf.toString();
+    }
+
+
+    
     public static ArrayList<String> splitByChar(String str, char ch) {
 
         ArrayList<String> ret = new ArrayList<String>();
