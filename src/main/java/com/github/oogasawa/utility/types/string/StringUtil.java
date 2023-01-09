@@ -9,7 +9,6 @@ import com.github.oogasawa.utility.types.Type;
 
 public class StringUtil {
 
-    //protected static org.slf4j.Logger logger = LoggerFactory.getLogger(StringUtil.class);
     public static void main(String[] args) {
         String testData = "abc\\n\ndef\tgh\\あ";
 

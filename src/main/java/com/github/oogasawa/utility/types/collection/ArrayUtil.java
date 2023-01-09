@@ -84,7 +84,7 @@ public class ArrayUtil {
     public static <T> String[] toStringArray(T[] a) {
         String[] result = new String[a.length];
         for (int i = 0; i < a.length; i++) {
-            result[i] = Type.toString(a[i]).orElse("");
+            result[i] = Type.toString(a[i]);
         }
         return result;
     }

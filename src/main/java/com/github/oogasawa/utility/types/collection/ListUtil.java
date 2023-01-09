@@ -9,15 +9,13 @@ import java.util.function.Function;
 
 import com.github.oogasawa.utility.types.Type;
 
-// import net.ogalab.microutil.functor.Functor;
-
 
 public class ListUtil {	
 
 	public static <T> ArrayList<Double> toDoubleList(ArrayList<T> list) {
 		ArrayList<Double> result = new ArrayList<Double>();
 		for (T elem : list) {
-			result.add(Type.toDouble(elem).orElse(0.0));
+			result.add(Type.toDouble(elem));
 		}
 		return result;
 	}
@@ -185,7 +183,7 @@ public class ListUtil {
 	public static <T> String[] toStringArray(ArrayList<T> list) {
 		String[] ret = new String[list.size()];
 		for (int i=0; i<list.size(); i++) {
-			ret[i] = Type.toString(list.get(i)).orElse("");
+			ret[i] = Type.toString(list.get(i));
 		}
 		return ret;
 	}
