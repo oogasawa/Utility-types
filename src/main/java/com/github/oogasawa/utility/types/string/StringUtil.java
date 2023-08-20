@@ -2,6 +2,7 @@ package com.github.oogasawa.utility.types.string;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,6 +10,8 @@ import com.github.oogasawa.utility.types.Type;
 
 public class StringUtil {
 
+    private static final Logger logger = Logger.getLogger("com.github.oogasawa.utility.types.string");
+    
     public static void main(String[] args) {
         String testData = "abc\\n\ndef\tgh\\あ";
 
@@ -45,8 +48,12 @@ public class StringUtil {
         StringBuilder sb = new StringBuilder();
 
         for (int index = 0; index < str.length(); index++) {
-            char c = str.charAt(index);
 
+            char c = str.charAt(index);
+            
+            logger.finest(String.format("index = %d, char c = %c, flg = %b", index, c, flg));
+            // System.out.println(String.format("index = %d, char c = %c", index, c));
+            
             switch (c) {
 
                 case '\\':
@@ -88,6 +95,8 @@ public class StringUtil {
 
     }
 
+
+    
     public static String asOneLine(String str) {
 
         StringBuilder sb = new StringBuilder();
@@ -103,6 +112,8 @@ public class StringUtil {
             for (int index = 0; index < str.length(); index++) {
                 char c = str.charAt(index);
 
+                logger.finest(String.format("index = %d, char c = %c", index, c));
+                //System.out.println(String.format("index = %d, char c = %c", index, c));
                 switch (c) {
 
                     case '\t':
@@ -114,30 +125,30 @@ public class StringUtil {
                     case '\n':
                         sb.append("\\" + "n");
                         break;
-                    case 'n':
-                        if (escaped) {
-                            sb.append("\\\\" + "n");
-                        } else {
-                            sb.append("n");
-                        }
-                        escaped = false;
-                        break;
-                    case 't':
-                        if (escaped) {
-                            sb.append("\\\\" + "t");
-                        } else {
-                            sb.append("t");
-                        }
-                        escaped = false;
-                        break;
-                    case '\\':
-                        if (escaped) {
-                            sb.append("\\\\");
-                            escaped = false;
-                        } else {
-                            escaped = true;
-                        }
-                        break;
+                    // case 'n':
+                    //     if (escaped) {
+                    //         sb.append("\\\\" + "n");
+                    //     } else {
+                    //         sb.append("n");
+                    //     }
+                    //     escaped = false;
+                    //     break;
+                    // case 't':
+                    //     if (escaped) {
+                    //         sb.append("\\\\" + "t");
+                    //     } else {
+                    //         sb.append("t");
+                    //     }
+                    //     escaped = false;
+                    //     break;
+                    // case '\\':
+                    //     if (escaped) {
+                    //         sb.append("\\\\");
+                    //         escaped = false;
+                    //     } else {
+                    //         escaped = true;
+                    //     }
+                    //     break;
                     default:
                         if (escaped) {
                             escaped = false;
