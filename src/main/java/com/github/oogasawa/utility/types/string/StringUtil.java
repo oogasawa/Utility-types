@@ -2,11 +2,12 @@ package com.github.oogasawa.utility.types.string;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.StringJoiner;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.github.oogasawa.utility.types.Type;
 
 public class StringUtil {
 
@@ -27,6 +28,7 @@ public class StringUtil {
     }
 
 
+    @Deprecated
     public static String reverse(String str) {
         return new StringBuffer(str).reverse().toString();
     }
@@ -215,23 +217,17 @@ public class StringUtil {
     }
 
 
-
-    private static <T> String join(String delim, ArrayList<T> list) {
+    private static <T> String join(String delim, List<T> list) {
         if (list == null || list.size() == 0) {
             return "";
         }
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(list.get(0));
-
-        for (int i = 1; i < list.size(); i++) {
-            sb.append(delim);
-            sb.append(Type.toString(list.get(i)));
-        }
-
-        return sb.toString();
+        StringJoiner joiner = new StringJoiner(delim);
+        list.stream().forEach(item -> joiner.add(item.toString()));
+        return joiner.toString();
     }
 
+    
     
     /** Replaces all tab characters in the given string with a string consisting of 8 space characters.
      *
