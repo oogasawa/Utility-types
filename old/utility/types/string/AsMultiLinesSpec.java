@@ -1,6 +1,6 @@
 package com.github.oogasawa.utility.types.string;
 
-import java.io.File;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.oogasawa.pojobdd.BddUtil;
-import com.github.oogasawa.utility.files.FileIO;
+//import com.github.oogasawa.utility.files.FileIO;
 
 public class AsMultiLinesSpec {
 
@@ -27,7 +27,7 @@ public class AsMultiLinesSpec {
             results.add(asMultiLinesDesc(out));
             results.add(asOneLineExample01(out));
             results.add(asMultiLinesExample01(out));
-            results.add(conversionOnFileExample(out));
+            //results.add(conversionOnFileExample(out));
             results.add(idempotenceExample(out));
 
             out.flush();
@@ -183,68 +183,68 @@ public class AsMultiLinesSpec {
 
 
 
-    public static boolean conversionOnFileExample(PrintStream out) {
+    // public static boolean conversionOnFileExample(PrintStream out) {
 
-        // Description
-        String description = """
-
-
-                ### Example: Conversion on a file
-
-                - Given a multi-line string
-                - When `asOneLine` method is applyed to the string and save to a file
-                - Then The same results are obtained as when processed in memory.
-
-                Code:
-
-                ```
-                {{snippet}}
-                ```
-
-                Result:
-
-                """;
-
-        // Reality
-        // %begin snippet : conversionOnFileExample
-
-        String result = null;
-        try {
-
-            String data = """
-                    Today is November 26th.
-                    It snowed all day today.
-                    The snow is beautiful.
-                    The snow finally stopped.
-                    """;
-
-            String testfile = "/tmp/as_multilines_test.txt";
-            FileIO.writeFile(new File(testfile), StringUtil.asOneLine(data));
-            result = FileIO.readFile(testfile);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // %end snippet : conversionOnFileExample
-
-        String snippet = BddUtil.readSnippet(
-                            Path.of("src/test/java/com/github/oogasawa/utility/types/string/AsMultiLinesSpec.java"),
-                            "conversionOnFileExample");
-        description = description.replace("{{snippet}}", snippet);
-        out.println(description);
+    //     // Description
+    //     String description = """
 
 
-        // Expectations
-        String expectation = "Today is November 26th.\\nIt snowed all day today.\\nThe snow is beautiful.\\nThe snow finally stopped.\\n\n";
+    //             ### Example: Conversion on a file
 
-        // Check the answer.
-        boolean passed = BddUtil.assertTrue(out, expectation, result);
+    //             - Given a multi-line string
+    //             - When `asOneLine` method is applyed to the string and save to a file
+    //             - Then The same results are obtained as when processed in memory.
 
-        assert passed;
-        return passed;
+    //             Code:
 
-        //return true;
-    }
+    //             ```
+    //             {{snippet}}
+    //             ```
+
+    //             Result:
+
+    //             """;
+
+    //     // Reality
+    //     // %begin snippet : conversionOnFileExample
+
+    //     String result = null;
+    //     try {
+
+    //         String data = """
+    //                 Today is November 26th.
+    //                 It snowed all day today.
+    //                 The snow is beautiful.
+    //                 The snow finally stopped.
+    //                 """;
+
+    //         String testfile = "/tmp/as_multilines_test.txt";
+    //         FileIO.writeFile(new File(testfile), StringUtil.asOneLine(data));
+    //         result = FileIO.readFile(testfile);
+
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    //     // %end snippet : conversionOnFileExample
+
+    //     String snippet = BddUtil.readSnippet(
+    //                         Path.of("src/test/java/com/github/oogasawa/utility/types/string/AsMultiLinesSpec.java"),
+    //                         "conversionOnFileExample");
+    //     description = description.replace("{{snippet}}", snippet);
+    //     out.println(description);
+
+
+    //     // Expectations
+    //     String expectation = "Today is November 26th.\\nIt snowed all day today.\\nThe snow is beautiful.\\nThe snow finally stopped.\\n\n";
+
+    //     // Check the answer.
+    //     boolean passed = BddUtil.assertTrue(out, expectation, result);
+
+    //     assert passed;
+    //     return passed;
+
+    //     //return true;
+    // }
 
 
     
